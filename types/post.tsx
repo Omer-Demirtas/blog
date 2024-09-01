@@ -2,6 +2,7 @@
 interface Post {
     id: String;
     title: String;
+    path: String[];
     content: PostElement[];
     createdDate: String;
     comments: PostComment[];

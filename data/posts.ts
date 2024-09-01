@@ -5,6 +5,7 @@ const posts: Post[] = [
     {
         id: '1',
         title: 'Spring Boot',
+        path: ['spring-boot'],
         content: [
             {
                 id: '1',
@@ -17,6 +18,7 @@ const posts: Post[] = [
                 content: {
                     id: '1',
                     title: 'Spring Boot Conditional',
+                    path: ['spring-boot', 'spring-boot-conditional'],
                     content: [],
                     comments: [],
                     createdDate: 'Today'
