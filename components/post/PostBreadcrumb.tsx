@@ -1,24 +1,25 @@
 import React from "react";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "../ui/breadcrumb";
 import { Slash } from "lucide-react";
+import TypographyH4 from "../common/TypographyH4";
 
-const PostBreadcrumb = ({ data } : { data: String[] }) => {
+const PostBreadcrumb = ({ paths, initPath } : { paths: String[], initPath: String }) => {
     return (
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
-                    <BreadcrumbLink href={"/posts/"}>Home</BreadcrumbLink>
+                    <BreadcrumbLink href={`${initPath}`}><TypographyH4>Home</TypographyH4></BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>
                     <Slash />
                 </BreadcrumbSeparator>
                 {
-                    data.map((id, i) => (
-                        <React.Fragment key={id.toString()}>
+                    paths.map((path, i) => (
+                        <React.Fragment key={path.toString()}>
                             <BreadcrumbItem>
-                                <BreadcrumbLink href={"/posts/" + data.slice(0, i + 1).join('/')}>{`${id}`}</BreadcrumbLink>
+                                <BreadcrumbLink href={initPath + paths.slice(0, i + 1).join('/')}><TypographyH4>{path}</TypographyH4></BreadcrumbLink>
                             </BreadcrumbItem>
-                            {i != data.length - 1 && (
+                            {i != paths.length - 1 && (
                                 <BreadcrumbSeparator>
                                     <Slash />
                                 </BreadcrumbSeparator>

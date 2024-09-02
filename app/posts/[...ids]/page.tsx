@@ -1,4 +1,5 @@
 import TypographyH1 from "@/components/common/TypographyH1";
+import TypographyH4 from "@/components/common/TypographyH4";
 import PostBreadcrumb from "@/components/post/PostBreadcrumb";
 import PostLink from "@/components/post/PostLink";
 import posts from "@/data/posts";
@@ -18,7 +19,7 @@ const PostPage = ({ params }: { params: { ids: String[] } }) => {
     const createElementByType = (element: PostElement) => {
         switch (element.type) {
             case ElementType.TEXT:
-                return <ElementContainer key={`${element.id}`}>{element.content}</ElementContainer>
+                return <ElementContainer key={`${element.id}`}><TypographyH4>{element.content}</TypographyH4></ElementContainer>
             case ElementType.POST:
                 return <ElementContainer key={`${element.id}`}><PostLink post={element.content as Post} /></ElementContainer>   
             default:
@@ -30,15 +31,13 @@ const PostPage = ({ params }: { params: { ids: String[] } }) => {
         return post.content.map(element => createElementByType(element));
     };
 
-    const postName = params.ids[params.ids.length - 1];
-
     const post: Post = posts.filter(p => p.path.join('/') === params.ids.join('/'))[0];
     
     if (post == null) return <h1>Not Found</h1>
 
     return ( 
         <div>
-            <PostBreadcrumb data={post.path} />
+            <PostBreadcrumb paths={post.path} initPath={"/posts/"} />
             <TypographyH1>{post.title}</TypographyH1>
             <div>
                 {createContent(post)}
