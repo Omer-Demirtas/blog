@@ -23,7 +23,17 @@ const posts: Post[] = [
                     comments: [],
                     createdDate: 'Today'
                 }
-            }
+            },
+            {
+                id: '3',
+                type: ElementType.TEXT,
+                content: 'Hello guys this pages about spring boot apps Hello guys this pages about spring boot apps Hello guys this pages about spring boot apps Hello guys this pages about spring boot apps Hello guys this pages about spring boot apps Hello guys this pages about spring boot appsHello guys this pages about spring boot apps',
+            },
+            {
+                id: '4',
+                type: ElementType.TEXT,
+                content: 'Hello guys this pages about spring boot apps',
+            },
         ],
         comments: [],
         createdDate: 'Today'
