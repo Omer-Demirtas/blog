@@ -14,17 +14,17 @@ const PostPage = ({ params }: { params: { ids: String[] } }) => {
     if (post == null) return <h1>Not Found</h1>
 
     return ( 
-        <div className="flex flex-col gap-4">
+        <React.Fragment>
             <PostBreadcrumb paths={post.path} initPath={"/posts/"} />
 
-            <main id="post" className="basis-auto flex flex-col gap-4">
+            <main id="post" className="basis-auto flex flex-col gap-4 mt-4">
                 <PostHeader post={post} />
 
                 <PostAboutSection post={post} />
                 
                 <PostBody post={post} />
             </main>
-        </div>
+        </React.Fragment>
     );
 }
  

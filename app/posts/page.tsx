@@ -1,10 +1,11 @@
 import TagGroup from "@/components/common/TagsGroup";
 import posts from "@/data/posts";
 import Link from "next/link";
+import React from "react";
 
 const PostHomePage = () => {
     return ( 
-        <div className="container mx-auto lg:px-0 mt-8">
+        <React.Fragment>
             <h1 className="text-4xl font-bold text-center mb-12">Blog Posts</h1>
             <div className="max-w-4xl mx-auto space-y-8"> {/* Center the posts and limit width */}
                 {posts.map((post) => (
@@ -24,7 +25,7 @@ const PostHomePage = () => {
                     </div>
                 ))}
             </div>
-        </div>
+        </React.Fragment>
     );
 }
  
