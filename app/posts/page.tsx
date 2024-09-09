@@ -11,12 +11,12 @@ const PostHomePage = () => {
                 {posts.map((post) => (
                     <div
                         key={post.id.toString()}
-                        className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+                        className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
                     >
                         <Link href={`/posts/${post.path.join('/')}`}>
-                        <h1 className="text-2xl font-semibold mb-2 cursor-pointer hover:text-blue-500">
-                            {post.title}
-                        </h1>
+                            <h2 className="text-2xl font-semibold mb-2 cursor-pointer hover:text-blue-500">
+                                {post.title}
+                            </h2>
                         </Link>
                         <p className="text-sm text-gray-600 mb-2">
                             {post.createdDate}
