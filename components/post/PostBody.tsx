@@ -1,15 +1,15 @@
-import Post, { ElementType, PostElement } from "@/types/post";
+import Post, { ElementType, PostElement, PostLink } from "@/types/post";
 import PostHeader from "./PostHeader";
 import TypographyH4 from "../common/TypographyH4";
-import PostLink from "./PostLink";
+import PostLinkElement from "./PostLinkElement";
 
 
 const createElementByType = (element: PostElement) => {
     switch (element.type) {
         case ElementType.TEXT:
-            return <TypographyH4 key={`${element.id}`}>{element.content}</TypographyH4>
+            return <TypographyH4 key={`${element.id}`}>{element.content.toString()}</TypographyH4>
         case ElementType.POST:
-            return <PostLink key={`${element.id}`} post={element.content as Post} />   
+            return <PostLinkElement key={`${element.id}`} postLink={element.content as PostLink} />   
         default:
             return <h1>Error</h1>
     }

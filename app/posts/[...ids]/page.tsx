@@ -1,4 +1,5 @@
 import TagGroup from "@/components/common/TagsGroup";
+import PostAboutSection from "@/components/post/PostAboutSection";
 import PostBody from "@/components/post/PostBody";
 import PostBreadcrumb from "@/components/post/PostBreadcrumb";
 import PostHeader from "@/components/post/PostHeader";
@@ -16,10 +17,10 @@ const PostPage = ({ params }: { params: { ids: String[] } }) => {
         <div className="flex flex-col gap-4">
             <PostBreadcrumb paths={post.path} initPath={"/posts/"} />
 
-            <TagGroup  tags={[{id: '1', name: 'java', color: 'green' }]} />
-
             <main id="post" className="basis-auto flex flex-col gap-4">
                 <PostHeader post={post} />
+
+                <PostAboutSection post={post} />
                 
                 <PostBody post={post} />
             </main>

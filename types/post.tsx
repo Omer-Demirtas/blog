@@ -3,6 +3,7 @@ interface Post {
     id: String;
     title: String;
     path: String[];
+    tags: Tag[];
     content: PostElement[];
     createdDate: String;
     comments: PostComment[];
@@ -11,7 +12,14 @@ interface Post {
 export interface PostElement {
     id: String;
     type: ElementType;
-    content: any;
+    content: String | PostLink;
+    params?: Object;
+}
+
+export interface PostLink {
+    id: String;
+    title: String;
+    path: String[];
 }
 
 export enum ElementType {

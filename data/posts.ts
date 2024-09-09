@@ -1,11 +1,11 @@
 import Post, { ElementType } from "@/types/post";
-import { Content } from "next/font/google";
 
 const posts: Post[] = [
     {
         id: '1',
         title: 'Spring Boot',
         path: ['spring-boot'],
+        tags: [{id: '1', name: 'java', color: 'green' }],
         content: [
             {
                 id: '1',
@@ -16,12 +16,9 @@ const posts: Post[] = [
                 id: '2',
                 type: ElementType.POST,
                 content: {
-                    id: '1',
-                    title: 'Spring Boot Conditional',
+                    id: '2',
                     path: ['spring-boot', 'spring-boot-conditional'],
-                    content: [],
-                    comments: [],
-                    createdDate: 'Today'
+                    title: 'Spring Boot Conditional',
                 }
             },
             {
@@ -33,6 +30,21 @@ const posts: Post[] = [
                 id: '4',
                 type: ElementType.TEXT,
                 content: 'Hello guys this pages about spring boot apps',
+            },
+        ],
+        comments: [],
+        createdDate: 'Today'
+    },
+    {
+        id: '2',
+        title: 'Spring Boot Contional',
+        path: ['spring-boot', 'spring-boot-conditional'],
+        tags: [{id: '1', name: 'java', color: 'green' }],
+        content: [
+            {
+                id: '123',
+                type: ElementType.TEXT,
+                content: 'Hello guys this pages about spring boot conditonal app',
             },
         ],
         comments: [],
