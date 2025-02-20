@@ -7,6 +7,14 @@ import posts from "@/data/posts";
 import Post, { ElementType, PostElement } from "@/types/post";
 import React from "react";
 
+
+export function generateStaticParams() {
+    return posts.map((post) => ({
+      ids: post.path,
+    }));
+}
+
+
 const PostPage = ({ params }: { params: { ids: String[] } }) => {
 
     const post: Post = posts.filter(p => p.path.join('/') === params.ids.join('/'))[0];
