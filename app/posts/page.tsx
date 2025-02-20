@@ -3,6 +3,12 @@ import posts from "@/data/posts";
 import Link from "next/link";
 import React from "react";
 
+export function generateStaticParams() {
+    return posts.map((post) => ({
+      ids: post.path, // Örneğin: { ids: ["spring-boot"] }
+    }));
+  }
+
 const PostHomePage = () => {
     return ( 
         <React.Fragment>
