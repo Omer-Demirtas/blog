@@ -1,73 +1,14 @@
 import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import ThemeToggle from "./common/ThemeToggle"
 
 export default function NavBar() {
   return (
-    <header className="flex w-full items-center justify-between bg-white px-4 py-3 shadow-sm dark:bg-gray-950 sm:px-6 md:px-8 lg:px-10">
-      <Link href="#" className="flex items-center" prefetch={false}>
-        <MountainIcon className="h-6 w-6" />
-        <span className="sr-only">Ömer Demirtaş</span>
-      </Link>
-      <nav className="hidden items-center gap-6 text-sm font-medium lg:flex">
-        <Link href="/" className="hover:underline hover:underline-offset-4" prefetch={false}>
-          Home
-        </Link>
-        <Link href="/about" className="hover:underline hover:underline-offset-4" prefetch={false}>
-          About
-        </Link>
-        <Link href="/posts" className="hover:underline hover:underline-offset-4" prefetch={false}>
-          Posts
-        </Link>
-      </nav>
-      <div className="flex items-center gap-4">
-        <form className="relative hidden lg:block">
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-            <SearchIcon className="h-5 w-5 text-gray-400" />
-          </div>
-          {
-            /*
-            <Input
-              type="search"
-              placeholder="Search..."
-              className="h-9 w-[200px] rounded-md border border-gray-300 bg-gray-100 pl-10 text-sm focus:border-gray-500 focus:bg-white focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:focus:border-gray-600"
-            />
-            */
-          } 
-        </form>
-        <Button variant="ghost" size="icon" className="rounded-full lg:hidden">
-          <SearchIcon className="h-5 w-5" />
-          <span className="sr-only">Search</span>
-        </Button>
-      </div>
-      <div className="fixed bottom-0 left-0 z-10 flex w-full items-center justify-around bg-white py-3 shadow-t dark:bg-gray-950 lg:hidden">
-        <Link
-          href="/"
-          className="flex flex-col items-center gap-1 text-xs font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-          prefetch={false}
-        >
-          <HomeIcon className="h-6 w-6" />
-          Home
-        </Link>
-        <Link
-          href="/about"
-          className="flex flex-col items-center gap-1 text-xs font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-          prefetch={false}
-        >
-          <InfoIcon className="h-6 w-6" />
-          About
-        </Link>
-        <Link
-          href="/posts"
-          className="flex flex-col items-center gap-1 text-xs font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-          prefetch={false}
-        >
-          <MailIcon className="h-6 w-6" />
-          Posts
-        </Link>
-      </div>
-    </header>
-  )
+<header className="fixed top-4 right-4 z-50">
+        <ThemeToggle />
+      </header>
+  );
 }
 
 function BriefcaseIcon(props) {
