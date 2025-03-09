@@ -29,7 +29,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col items-center h-screen">
+    <main className="flex flex-col items-center">
       <div className="container px-8 md:px-16 max-w-2xl pt-32">
         <TypeWriter fullText="Hello, World!" />
         <ul className="flex flex-col items-start mt-2 space-y-4">
