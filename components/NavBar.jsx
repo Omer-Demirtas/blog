@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "./common/ThemeToggle";
 import {
-  BriefcaseIcon,
   HomeIcon,
   SearchIcon,
 } from "./icons";
