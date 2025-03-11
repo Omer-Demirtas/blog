@@ -3,7 +3,7 @@ import Terminal from "../terminal/Terminal";
 import Link from "next/link";
 
 const HomePageContent = () => {
-  const { showTerminal, setShowTerminal } = useAppContext();
+  const { showTerminal } = useAppContext();
 
   const terminalCommands = {
     ls: {
@@ -30,7 +30,7 @@ const HomePageContent = () => {
   };
 
   return (
-    <div className="mt-3">
+    <div className="mt-4">
       <div className={`transition-opacity duration-500 ${showTerminal ? "opacity-100" : "opacity-0"}`}>
         {showTerminal && <Terminal commands={terminalCommands} />}
       </div>
