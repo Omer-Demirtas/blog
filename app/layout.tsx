@@ -20,15 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider 
-            attribute="class" 
-            defaultTheme="system" 
-            enableSystem
-          >
-          <NavBar />
-          <div className="container mx-auto px-4 py-4">
-            {children}
-          </div>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+        >
+          {children}
         </ThemeProvider>
       </body>
     </html>
