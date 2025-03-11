@@ -24,7 +24,7 @@ const IconToggleButton: React.FC<IconToggleButtonProps> = ({
       onClick={onToggle}
       aria-label={ariaLabel}
       className={`focus:outline-none transition-transform duration-150 active:scale-95 hover:text-blue-500 ${className}`}
-          >
+    >
       {isOn ? onIcon : offIcon}
     </button>
   );
