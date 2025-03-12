@@ -7,53 +7,75 @@ import TypeWriter from "../common/TypeWriter";
 const HomePageContent = () => {
   const { showTerminal } = useAppContext();
 
+
   const terminalCommands = {
     ls: {
       output: (
         <ul>
           <li>
-            <Link href="/posts" className="text-blue-400 hover:underline">posts</Link>
+            <Link href="/posts" className="text-blue-400 hover:underline">
+              posts
+            </Link>
           </li>
           <li>
-            <Link href="/about" className="text-blue-400 hover:underline">about</Link>
+            <Link href="/about" className="text-blue-400 hover:underline">
+              about
+            </Link>
           </li>
         </ul>
       ),
-      description: "List available directories."
+      description: 'List available directories.',
     },
     hello: {
       output: <TypeWriter fullText="Hello, World;" />,
-      description: "Prints a greeting."
+      description: 'Prints a greeting.',
     },
     wellcome: {
-      output: <p>Wellcome to my website!, <span className="font-bold">please type help to see available commands</span></p>,
-      description: "Prints a wellcome message."
+      output: (
+        <p>
+          Wellcome to my website!,{' '}
+          <span className="font-bold">
+            please type help to see available commands
+          </span>
+        </p>
+      ),
+      description: 'Prints a wellcome message.',
     },
     about: {
       output: (
         <div>
-          <p>Hey there, I'm Ömer Demirtaş.</p>
+          <p>Hey there, I&apos;m Ömer Demirtaş.</p>
           <p>
-            I'm a full-stack developer, and honestly, I really love building things. My heart's definitely in the backend – I get a kick out of crafting solid systems with Spring Boot, wiring up messaging with Kafka and RabbitMQ, and making everything play nicely in Kubernetes.
+            I&apos;m a full-stack developer, and honestly, I really love building
+            things. My heart&apos;s definitely in the backend – I get a kick out
+            of crafting solid systems with Spring Boot, wiring up messaging with
+            Kafka and RabbitMQ, and making everything play nicely in Kubernetes.
           </p>
           <p>
-            I enjoy figuring out the big picture, designing system architectures that actually work, and automating stuff with Jenkins pipelines. Plus, I'm pretty comfortable hanging out in the Linux terminal.
+            I enjoy figuring out the big picture, designing system architectures
+            that actually work, and automating stuff with Jenkins pipelines. Plus,
+            I&apos;m pretty comfortable hanging out in the Linux terminal.
           </p>
           <p>
-            On the frontend, I use React and Next.js to make things look good and feel smooth. It's all about making the whole experience come together.
+            On the frontend, I use React and Next.js to make things look good and
+            feel smooth. It&apos;s all about making the whole experience come
+            together.
           </p>
           <p>
-            If you're looking for someone who's genuinely passionate about building good software, and who can handle the backend heavy lifting, then let's chat!
+            If you&apos;re looking for someone who&apos;s genuinely passionate
+            about building good software, and who can handle the backend heavy
+            lifting, then let&apos;s chat!
           </p>
         </div>
       ),
-      description: "Learn more about Ömer Demirtaş.",
+      description: 'Learn more about Ömer Demirtaş.',
     },
     version: {
-      output: "v1.0.0",
-      description: "Displays the current version."
-    }
+      output: 'v1.0.0',
+      description: 'Displays the current version.',
+    },
   };
+  
 
   const terminalRef = useRef<any>(null);
 
