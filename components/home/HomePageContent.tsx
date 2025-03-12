@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useAppContext } from "../providers/AppStateContext";
 import Terminal from "../terminal/Terminal";
 import Link from "next/link";
@@ -76,14 +76,14 @@ const HomePageContent = () => {
   }, []);
 
   return (    
-    <div className="mt-4 ">
+    <React.Fragment>
       <div className={`transition-opacity duration-500 ${showTerminal ? "opacity-100" : "opacity-0"}`}>
         {showTerminal && <Terminal ref={terminalRef}  initialCommands={terminalCommands} />}
       </div>
       <div className={`transition-opacity duration-500 ${showTerminal ? "opacity-0" : "opacity-100"}`}>
         {!showTerminal && <UIPage />}
       </div>
-    </div>
+    </React.Fragment>
   );
 }
 
