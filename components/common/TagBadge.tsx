@@ -1,7 +1,18 @@
-import { Badge } from "../ui/badge";
+"use client";
 
-const TagBadge = ({ tag } : { tag: Tag }) => {
-    return <Badge>{tag.name}</Badge>
+import { Badge } from "@/components/ui/badge";
+import { Tag } from "@/types/tag";
+
+interface TagBadgeProps {
+  tag: Tag;
 }
- 
+
+const TagBadge = ({ tag }: TagBadgeProps) => {
+  return (
+    <Badge variant="secondary" className="glass-effect" style={{ backgroundColor: tag.color }}>
+      {tag.name}
+    </Badge>
+  );
+};
+
 export default TagBadge;

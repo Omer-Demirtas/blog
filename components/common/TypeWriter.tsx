@@ -20,7 +20,7 @@ const TypeWriter = ({ fullText }: { fullText: string }) => {
   }, [index, fullText]);
 
   return (
-    <h1 className="text-4xl md:text-6xl text-left font-extrabold text-foreground font-mono tracking-tight">
+    <h1 className="text-4xl md:text-6xl text-left font-extrabold font-mono tracking-tight">
       {text === "" ? (fullText.charAt(0)) : text}
     </h1>
   );

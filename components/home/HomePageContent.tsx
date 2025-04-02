@@ -1,12 +1,14 @@
-import React, { useEffect, useRef } from "react";
-import { useAppContext } from "../providers/AppStateContext";
-import Terminal from "../terminal/Terminal";
+"use client";
+
+import React, { useRef, useEffect } from "react";
+import Terminal, { TerminalRef } from "../terminal/Terminal";
 import Link from "next/link";
 import TypeWriter from "../common/TypeWriter";
+import { motion } from "framer-motion";
+import { Github, Linkedin, Mail, Terminal as TerminalIcon } from "lucide-react";
 
 const HomePageContent = () => {
-  const { showTerminal } = useAppContext();
-
+  const terminalRef = useRef<TerminalRef>(null);
 
   const terminalCommands = {
     ls: {
@@ -75,62 +77,128 @@ const HomePageContent = () => {
       description: 'Displays the current version.',
     },
   };
-  
 
-  const terminalRef = useRef<any>(null);
+  // Mock data for recent posts
+  const recentPosts = [
+    {
+      title: "Building a Modern Terminal Interface",
+      date: "2024-03-15",
+      description: "Learn how to create a beautiful terminal interface using React and TypeScript.",
+      slug: "building-modern-terminal-interface"
+    },
+    {
+      title: "Space Theme Design System",
+      date: "2024-03-10",
+      description: "Creating a cohesive space-themed design system for web applications.",
+      slug: "space-theme-design-system"
+    },
+    {
+      title: "Next.js 14 Features Overview",
+      date: "2024-03-05",
+      description: "Exploring the latest features and improvements in Next.js 14.",
+      slug: "nextjs-14-features-overview"
+    }
+  ];
 
   useEffect(() => {
+    // Execute help command when terminal is mounted
     if (terminalRef.current) {
-      terminalRef.current.runCommand("hello");
-
-      const timeoutId1 = setTimeout(() => {
-        terminalRef.current.runCommand("wellcome");
-
-        const timeoutId2 = setTimeout(() => {
-          terminalRef.current.runCommand("about");
-        }, 500);
-
-        return () => clearTimeout(timeoutId2);
-      }, 500);
-
-      return () => clearTimeout(timeoutId1);
+      terminalRef.current.executeCommand('help');
     }
   }, []);
 
-  return (    
-    <React.Fragment>
-      <div className={`transition-opacity duration-500 ${showTerminal ? "opacity-100" : "opacity-0"}`}>
-        {showTerminal && <Terminal ref={terminalRef}  initialCommands={terminalCommands} />}
+  return (
+    <div className="min-h-[80vh] flex flex-col justify-center">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="mb-8 glass-effect rounded-lg p-8 max-w-2xl mx-auto"
+      >
+        <h1 className="text-4xl font-bold mb-2 text-primary">Ömer Demirtaş</h1>
+        <p className="text-xl text-muted-foreground">Software Engineer</p>
+      </motion.div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="space-y-4"
+        >
+          {recentPosts.map((post, index) => (
+            <motion.div
+              key={post.slug}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 * index }}
+              className="glass-effect rounded-lg p-4 hover:bg-primary/5 transition-colors"
+            >
+              <Link href={`/posts/${post.slug}`}>
+                <h3 className="text-lg font-medium mb-2 text-primary hover:text-primary/80">
+                  {post.title}
+                </h3>
+                <p className="text-sm text-muted-foreground mb-2">{post.description}</p>
+                <span className="text-xs text-muted-foreground">{post.date}</span>
+              </Link>
+            </motion.div>
+          ))}
+
+          <div className="flex justify-center gap-4 mt-6">
+            <Link
+              href="/posts"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              All Posts
+            </Link>
+            <Link
+              href="/about"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              About
+            </Link>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 20, scale: 0.95 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{ 
+            duration: 0.5, 
+            delay: 0.4,
+            type: "spring",
+            stiffness: 100,
+            damping: 10
+          }}
+          whileHover={{ scale: 1.02 }}
+          className="glass-effect rounded-lg h-full flex flex-col overflow-hidden"
+        >
+          <Terminal ref={terminalRef} initialCommands={terminalCommands} className="flex-1" />
+        </motion.div>
       </div>
-      <div className={`transition-opacity duration-500 ${showTerminal ? "opacity-0" : "opacity-100"}`}>
-        {!showTerminal && <UIPage />}
+
+      <div className="flex justify-center gap-4 mt-6">
+        <a
+          href="https://github.com/Omer-Demirtas"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+        >
+          <Github className="w-5 h-5" />
+          GitHub
+        </a>
+        <a
+          href="https://linkedin.com/in/omer-demirtas"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+        >
+          <Linkedin className="w-5 h-5" />
+          LinkedIn
+        </a>
       </div>
-    </React.Fragment>
+    </div>
   );
-}
+};
 
 export default HomePageContent;
-
-
-const UIPage = () => {
-  return (
-    <ul className="flex flex-col items-start space-y-4">
-      <li>
-        <Link
-          href="/about"
-          className="text-3xl font-semibold text-primary hover:text-primary/80 transition-colors duration-200"
-        >
-          About
-        </Link>
-      </li>
-      <li>
-        <Link
-          href="/posts"
-          className="text-3xl font-semibold text-primary hover:text-primary/80 transition-colors duration-200"
-        >
-          Posts
-        </Link>
-      </li>
-    </ul>
-  );
-}
