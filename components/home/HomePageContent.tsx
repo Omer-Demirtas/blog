@@ -1,12 +1,23 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAppContext } from "../providers/AppStateContext";
 import Terminal from "../terminal/Terminal";
 import Link from "next/link";
 import TypeWriter from "../common/TypeWriter";
+import { motion } from "framer-motion";
 
 const HomePageContent = () => {
   const { showTerminal } = useAppContext();
+  const [stars, setStars] = useState<Array<{ id: number; x: number; y: number }>>([]);
 
+  useEffect(() => {
+    // Generate random stars
+    const newStars = Array.from({ length: 50 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+    }));
+    setStars(newStars);
+  }, []);
 
   const terminalCommands = {
     ls: {
@@ -98,39 +109,107 @@ const HomePageContent = () => {
   }, []);
 
   return (    
-    <React.Fragment>
-      <div className={`transition-opacity duration-500 ${showTerminal ? "opacity-100" : "opacity-0"}`}>
-        {showTerminal && <Terminal ref={terminalRef}  initialCommands={terminalCommands} />}
+    <div className="relative min-h-screen overflow-hidden">
+      {/* Stars background */}
+      <div className="absolute inset-0">
+        {stars.map((star) => (
+          <div
+            key={star.id}
+            className="star"
+            style={{
+              left: `${star.x}%`,
+              top: `${star.y}%`,
+              animationDelay: `${Math.random() * 2}s`,
+            }}
+          />
+        ))}
       </div>
-      <div className={`transition-opacity duration-500 ${showTerminal ? "opacity-0" : "opacity-100"}`}>
-        {!showTerminal && <UIPage />}
+
+      <div className="relative">
+        <motion.div 
+          className={`transition-opacity duration-500 ${showTerminal ? "opacity-100" : "opacity-0"}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: showTerminal ? 1 : 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          {showTerminal && <Terminal ref={terminalRef} initialCommands={terminalCommands} />}
+        </motion.div>
+        <motion.div 
+          className={`transition-opacity duration-500 ${showTerminal ? "opacity-0" : "opacity-100"}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: showTerminal ? 0 : 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          {!showTerminal && <UIPage />}
+        </motion.div>
       </div>
-    </React.Fragment>
+    </div>
   );
 }
 
 export default HomePageContent;
 
-
 const UIPage = () => {
+  const menuItems = [
+    { href: "/about", label: "About", delay: 0.1 },
+    { href: "/posts", label: "Posts", delay: 0.2 },
+    { href: "/contact", label: "Contact", delay: 0.3 },
+  ];
+
   return (
-    <ul className="flex flex-col items-start space-y-4">
-      <li>
-        <Link
-          href="/about"
-          className="text-3xl font-semibold text-primary hover:text-primary/80 transition-colors duration-200"
+    <div className="min-h-[80vh] flex flex-col justify-center">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="mb-8 glass-effect rounded-lg p-8 max-w-2xl mx-auto"
+      >
+        <h1 className="text-4xl font-bold mb-2 text-primary">Ömer Demirtaş</h1>
+        <p className="text-xl text-muted-foreground">Software Engineer</p>
+      </motion.div>
+      <ul className="flex flex-col items-start space-y-6">
+        {menuItems.map((item) => (
+          <motion.li
+            key={item.href}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: item.delay }}
+          >
+            <Link
+              href={item.href}
+              className="group text-3xl font-semibold text-primary hover:text-primary/80 transition-colors duration-200 flex items-center gap-2"
+            >
+              <span className="relative">
+                {item.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+              </span>
+            </Link>
+          </motion.li>
+        ))}
+      </ul>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        className="mt-12 flex gap-4"
+      >
+        <a
+          href="https://github.com/yourusername"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-foreground hover:text-primary transition-colors"
         >
-          About
-        </Link>
-      </li>
-      <li>
-        <Link
-          href="/posts"
-          className="text-3xl font-semibold text-primary hover:text-primary/80 transition-colors duration-200"
+          GitHub
+        </a>
+        <a
+          href="https://linkedin.com/in/yourusername"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-foreground hover:text-primary transition-colors"
         >
-          Posts
-        </Link>
-      </li>
-    </ul>
+          LinkedIn
+        </a>
+      </motion.div>
+    </div>
   );
 }
