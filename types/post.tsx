@@ -1,20 +1,27 @@
+export type Tag = string;
 
-interface Post {
-    id: String;
-    title: String;
-    path: String[];
-    tags: Tag[];
-    content: PostElement[];
-    createdDate: String;
-    comments: PostComment[];
+export type PostElement = {
+  type: string;
+  content: string;
+  children?: PostElement[];
 };
 
-export interface PostElement {
-    id: String;
-    type: ElementType;
-    content: String | PostLink;
-    params?: Object;
-}
+export type PostComment = {
+  id: string;
+  author: string;
+  content: string;
+  createdDate: string;
+};
+
+export type Post = {
+  id: string;
+  title: string;
+  path: string[];
+  tags: Tag[];
+  content: PostElement[];
+  createdDate: string;
+  comments: PostComment[];
+};
 
 export interface PostLink {
     id: String;
@@ -25,13 +32,6 @@ export interface PostLink {
 export enum ElementType {
     TEXT,
     POST
-}
-
-export interface PostComment {
-    id: String;
-    title: String;
-    userId: String;
-    content: String;
 }
 
 export default Post;

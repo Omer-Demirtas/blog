@@ -50,7 +50,7 @@ export default function About() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              Hey there! I'm Ömer Demirtaş, a passionate software engineer with a deep love for building robust and scalable systems. My journey in software development has been driven by curiosity and a desire to create elegant solutions to complex problems.
+              Hey there! I&apos;m Ömer Demirtaş, a passionate software engineer with a deep love for building robust and scalable systems. My journey in software development has been driven by curiosity and a desire to create elegant solutions to complex problems.
             </motion.p>
 
             <motion.p
@@ -88,7 +88,7 @@ export default function About() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing my knowledge through technical blog posts. I'm always excited to learn new things and share my experiences with the developer community.
+              When I&apos;m not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing my knowledge through technical blog posts. I&apos;m always excited to learn new things and share my experiences with the developer community.
             </motion.p>
 
             <motion.div
