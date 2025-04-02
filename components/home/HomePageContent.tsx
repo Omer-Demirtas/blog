@@ -1,23 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useAppContext } from "../providers/AppStateContext";
-import Terminal from "../terminal/Terminal";
+"use client";
+
+import React, { useRef, useEffect } from "react";
+import Terminal, { TerminalRef } from "../terminal/Terminal";
 import Link from "next/link";
 import TypeWriter from "../common/TypeWriter";
 import { motion } from "framer-motion";
+import { Github, Linkedin, Mail, Terminal as TerminalIcon } from "lucide-react";
 
 const HomePageContent = () => {
-  const { showTerminal } = useAppContext();
-  const [stars, setStars] = useState<Array<{ id: number; x: number; y: number }>>([]);
-
-  useEffect(() => {
-    // Generate random stars
-    const newStars = Array.from({ length: 50 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-    }));
-    setStars(newStars);
-  }, []);
+  const terminalRef = useRef<TerminalRef>(null);
 
   const terminalCommands = {
     ls: {
@@ -86,75 +77,35 @@ const HomePageContent = () => {
       description: 'Displays the current version.',
     },
   };
-  
 
-  const terminalRef = useRef<any>(null);
+  // Mock data for recent posts
+  const recentPosts = [
+    {
+      title: "Building a Modern Terminal Interface",
+      date: "2024-03-15",
+      description: "Learn how to create a beautiful terminal interface using React and TypeScript.",
+      slug: "building-modern-terminal-interface"
+    },
+    {
+      title: "Space Theme Design System",
+      date: "2024-03-10",
+      description: "Creating a cohesive space-themed design system for web applications.",
+      slug: "space-theme-design-system"
+    },
+    {
+      title: "Next.js 14 Features Overview",
+      date: "2024-03-05",
+      description: "Exploring the latest features and improvements in Next.js 14.",
+      slug: "nextjs-14-features-overview"
+    }
+  ];
 
   useEffect(() => {
+    // Execute help command when terminal is mounted
     if (terminalRef.current) {
-      terminalRef.current.runCommand("hello");
-
-      const timeoutId1 = setTimeout(() => {
-        terminalRef.current.runCommand("wellcome");
-
-        const timeoutId2 = setTimeout(() => {
-          terminalRef.current.runCommand("about");
-        }, 500);
-
-        return () => clearTimeout(timeoutId2);
-      }, 500);
-
-      return () => clearTimeout(timeoutId1);
+      terminalRef.current.executeCommand('help');
     }
   }, []);
-
-  return (    
-    <div className="relative min-h-screen overflow-hidden">
-      {/* Stars background */}
-      <div className="absolute inset-0">
-        {stars.map((star) => (
-          <div
-            key={star.id}
-            className="star"
-            style={{
-              left: `${star.x}%`,
-              top: `${star.y}%`,
-              animationDelay: `${Math.random() * 2}s`,
-            }}
-          />
-        ))}
-      </div>
-
-      <div className="relative">
-        <motion.div 
-          className={`transition-opacity duration-500 ${showTerminal ? "opacity-100" : "opacity-0"}`}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: showTerminal ? 1 : 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          {showTerminal && <Terminal ref={terminalRef} initialCommands={terminalCommands} />}
-        </motion.div>
-        <motion.div 
-          className={`transition-opacity duration-500 ${showTerminal ? "opacity-0" : "opacity-100"}`}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: showTerminal ? 0 : 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          {!showTerminal && <UIPage />}
-        </motion.div>
-      </div>
-    </div>
-  );
-}
-
-export default HomePageContent;
-
-const UIPage = () => {
-  const menuItems = [
-    { href: "/about", label: "About", delay: 0.1 },
-    { href: "/posts", label: "Posts", delay: 0.2 },
-    { href: "/contact", label: "Contact", delay: 0.3 },
-  ];
 
   return (
     <div className="min-h-[80vh] flex flex-col justify-center">
@@ -167,49 +118,66 @@ const UIPage = () => {
         <h1 className="text-4xl font-bold mb-2 text-primary">Ömer Demirtaş</h1>
         <p className="text-xl text-muted-foreground">Software Engineer</p>
       </motion.div>
-      <ul className="flex flex-col items-start space-y-6">
-        {menuItems.map((item) => (
-          <motion.li
-            key={item.href}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: item.delay }}
-          >
-            <Link
-              href={item.href}
-              className="group text-3xl font-semibold text-primary hover:text-primary/80 transition-colors duration-200 flex items-center gap-2"
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="space-y-4"
+        >
+          {recentPosts.map((post, index) => (
+            <motion.div
+              key={post.slug}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 * index }}
+              className="glass-effect rounded-lg p-4 hover:bg-primary/5 transition-colors"
             >
-              <span className="relative">
-                {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-              </span>
+              <Link href={`/posts/${post.slug}`}>
+                <h3 className="text-lg font-medium mb-2 text-primary hover:text-primary/80">
+                  {post.title}
+                </h3>
+                <p className="text-sm text-muted-foreground mb-2">{post.description}</p>
+                <span className="text-xs text-muted-foreground">{post.date}</span>
+              </Link>
+            </motion.div>
+          ))}
+
+          <div className="flex justify-center gap-4 mt-6">
+            <Link
+              href="/posts"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              All Posts
             </Link>
-          </motion.li>
-        ))}
-      </ul>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-        className="mt-12 flex gap-4"
-      >
-        <a
-          href="https://github.com/yourusername"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-muted-foreground hover:text-primary transition-colors"
+            <Link
+              href="/about"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              About
+            </Link>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 20, scale: 0.95 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{ 
+            duration: 0.5, 
+            delay: 0.4,
+            type: "spring",
+            stiffness: 100,
+            damping: 10
+          }}
+          whileHover={{ scale: 1.02 }}
+          className="glass-effect rounded-lg h-full flex flex-col overflow-hidden"
         >
-          GitHub
-        </a>
-        <a
-          href="https://linkedin.com/in/yourusername"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-muted-foreground hover:text-primary transition-colors"
-        >
-          LinkedIn
-        </a>
-      </motion.div>
+          <Terminal ref={terminalRef} initialCommands={terminalCommands} className="flex-1" />
+        </motion.div>
+      </div>
     </div>
   );
-}
+};
+
+export default HomePageContent;
