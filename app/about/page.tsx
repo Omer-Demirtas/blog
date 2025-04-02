@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { Github, Linkedin } from "lucide-react";
 
 export default function About() {
   const [stars, setStars] = useState<Array<{ id: number; x: number; y: number }>>([]);
@@ -97,19 +98,21 @@ export default function About() {
               className="mt-8 flex gap-4"
             >
               <a
-                href="https://github.com/yourusername"
+                href="https://github.com/Omer-Demirtas"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary hover:text-primary/80 transition-colors"
+                className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
               >
+                <Github className="w-5 h-5" />
                 GitHub
               </a>
               <a
-                href="https://linkedin.com/in/yourusername"
+                href="https://linkedin.com/in/omer-demirtas"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary hover:text-primary/80 transition-colors"
+                className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
               >
+                <Linkedin className="w-5 h-5" />
                 LinkedIn
               </a>
             </motion.div>

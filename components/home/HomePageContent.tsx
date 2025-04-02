@@ -176,6 +176,27 @@ const HomePageContent = () => {
           <Terminal ref={terminalRef} initialCommands={terminalCommands} className="flex-1" />
         </motion.div>
       </div>
+
+      <div className="flex justify-center gap-4 mt-6">
+        <a
+          href="https://github.com/Omer-Demirtas"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+        >
+          <Github className="w-5 h-5" />
+          GitHub
+        </a>
+        <a
+          href="https://linkedin.com/in/omer-demirtas"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+        >
+          <Linkedin className="w-5 h-5" />
+          LinkedIn
+        </a>
+      </div>
     </div>
   );
 };

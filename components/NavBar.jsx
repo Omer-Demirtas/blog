@@ -32,10 +32,10 @@ export default function NavBar() {
         </nav>
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-4">
-            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-primary/10 rounded-md transition-colors">
+            <a href="https://github.com/Omer-Demirtas" target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-primary/10 rounded-md transition-colors">
               <GithubIcon className="w-5 h-5" />
             </a>
-            <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-primary/10 rounded-md transition-colors">
+            <a href="https://linkedin.com/in/omer-demirtas" target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-primary/10 rounded-md transition-colors">
               <LinkedinIcon className="w-5 h-5" />
             </a>
           </div>
