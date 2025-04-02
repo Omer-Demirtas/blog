@@ -1,8 +1,14 @@
-export type Tag = string;
+export interface Tag {
+  id: string;
+  name: string;
+  slug: string;
+  color: string;
+}
 
 export type PostElement = {
-  type: string;
-  content: string;
+  id: string;
+  type: ElementType;
+  content: string | PostLink;
   children?: PostElement[];
 };
 
@@ -24,14 +30,14 @@ export type Post = {
 };
 
 export interface PostLink {
-    id: String;
-    title: String;
-    path: String[];
+  id: string;
+  title: string;
+  path: string[];
 }
 
 export enum ElementType {
-    TEXT,
-    POST
+  TEXT = 'TEXT',
+  POST = 'POST'
 }
 
 export default Post;
